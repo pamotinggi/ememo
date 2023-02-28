@@ -1,0 +1,39 @@
+{
+  "project_info": {
+    "project_number": "592410628467",
+    "project_id": "ememo-893f4",
+    "storage_bucket": "ememo-893f4.appspot.com"
+  },
+  "client": [
+    {
+      "client_info": {
+        "mobilesdk_app_id": "1:592410628467:android:4a0855332fffb5a9137506",
+        "android_client_info": {
+          "package_name": "com.example.ememo"
+        }
+      },
+      "oauth_client": [
+        {
+          "client_id": "592410628467-a005iolold1o84brjmbtkjmpstiigib0.apps.googleusercontent.com",
+          "client_type": 3
+        }
+      ],
+      "api_key": [
+        {
+          "current_key": "AIzaSyBRcLbWZepZfzHq1DP3-GrOhmhavQ_cgXI"
+        }
+      ],
+      "services": {
+        "appinvite_service": {
+          "other_platform_oauth_client": [
+            {
+              "client_id": "592410628467-a005iolold1o84brjmbtkjmpstiigib0.apps.googleusercontent.com",
+              "client_type": 3
+            }
+          ]
+        }
+      }
+    }
+  ],
+  "configuration_version": "1"
+}
