@@ -1,6 +1,8 @@
+import 'package:ememo/screen/homepage.dart';
 import 'package:ememo/screen/registerscreen.dart';
 import 'package:firebase_auth/firebase_auth.dart';
 import 'package:flutter/material.dart';
+import 'package:fluttertoast/fluttertoast.dart';
 
 class LoginScreen extends StatefulWidget {
   const LoginScreen({Key? key}) : super(key: key);
@@ -78,7 +80,7 @@ class _LoginScreenState extends State<LoginScreen> {
       color: Color(0xffFFE9B1),
       child: MaterialButton(
         onPressed: () {
-          //signin(emailController.text, passwordController.text);
+          signin(emailController.text, passwordController.text);
         },
         child: Text(
           "LOGIN",
@@ -158,5 +160,19 @@ class _LoginScreenState extends State<LoginScreen> {
         ),
       ),
     );
+  }
+  void signin(String email, String password) async {
+    if (_formkey.currentState!.validate()) {
+      await _auth
+          .signInWithEmailAndPassword(email: email, password: password)
+          .then((uid) => {
+        Fluttertoast.showToast(msg: "Login Successful"),
+        Navigator.of(context).pushReplacement(
+            MaterialPageRoute(builder: (context) => HomePage())),
+      })
+          .catchError((e) {
+        Fluttertoast.showToast(msg: e!.message);
+      });
+    }
   }
 }

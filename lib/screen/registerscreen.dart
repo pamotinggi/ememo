@@ -1,5 +1,10 @@
+import 'package:cloud_firestore/cloud_firestore.dart';
 import 'package:firebase_auth/firebase_auth.dart';
 import 'package:flutter/material.dart';
+import 'package:fluttertoast/fluttertoast.dart';
+
+import '../model/user_model.dart';
+import 'loginscreen.dart';
 
 class RegisterScreen extends StatefulWidget {
   const RegisterScreen({Key? key}) : super(key: key);
@@ -163,7 +168,7 @@ class _RegisterScreenState extends State<RegisterScreen> {
       color: Colors.blue,
       child: MaterialButton(
         onPressed: () {
-          //signup(emailEditingController.text, passwordEditingController.text);
+          signup(emailEditingController.text, passwordEditingController.text);
         },
         child: Text(
           "SIGNUP",
@@ -231,5 +236,34 @@ class _RegisterScreenState extends State<RegisterScreen> {
         ),
       ),
     );
+  }
+  void signup(String email, String password) async {
+    if (_formKey.currentState!.validate()) {
+      await _auth
+        ..createUserWithEmailAndPassword(email: email, password: password)
+            .then((value) => {posDetailsToFirestore()})
+            .catchError((e) {
+          Fluttertoast.showToast(msg: e!.message);
+        });
+    }
+  }
+  posDetailsToFirestore() async {
+    FirebaseFirestore firebasefirestore = FirebaseFirestore.instance;
+    User? user = _auth.currentUser;
+    UserModel userModel = UserModel();
+    userModel.email = user!.email;
+    userModel.uid = user.uid;
+    userModel.name = nameEditingController.text;
+    userModel.username = usernameEditingController.text;
+
+    await firebasefirestore
+        .collection("users")
+        .doc(user.uid)
+        .set(userModel.toMap());
+    Fluttertoast.showToast(msg: "Successfully created the account");
+    Navigator.pushAndRemoveUntil(
+        context,
+        MaterialPageRoute(builder: (context) => LoginScreen()),
+            (route) => false);
   }
 }
