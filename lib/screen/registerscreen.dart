@@ -165,7 +165,7 @@ class _RegisterScreenState extends State<RegisterScreen> {
     final signupButton = Material(
       elevation: 5,
       borderRadius: BorderRadius.circular(30),
-      color: Colors.blue,
+      color: Color(0xffFFE9B1),
       child: MaterialButton(
         onPressed: () {
           signup(emailEditingController.text, passwordEditingController.text);
@@ -175,7 +175,7 @@ class _RegisterScreenState extends State<RegisterScreen> {
           textAlign: TextAlign.center,
           style: TextStyle(
             fontSize: 20,
-            color: Color(0xffFFE9B1),
+            color: Colors.black,
             fontWeight: FontWeight.bold,
           ),
         ),
@@ -188,7 +188,7 @@ class _RegisterScreenState extends State<RegisterScreen> {
       body: Center(
         child: SingleChildScrollView(
           child: Container(
-            color: Colors.green,
+            color: Colors.blue,
             child: Padding(
               padding: const EdgeInsets.all(36),
               child: Form(
@@ -200,7 +200,7 @@ class _RegisterScreenState extends State<RegisterScreen> {
                     SizedBox(
                       height: 200,
                       child: Image.asset(
-                        "asset/loginillus.png",
+                        "assets/memologo.png",
                         fit: BoxFit.contain,
                       ),
                     ),

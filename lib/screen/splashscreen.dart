@@ -1,5 +1,6 @@
 import 'dart:async';
 
+import 'package:easy_splash_screen/easy_splash_screen.dart';
 import 'package:flutter/material.dart';
 
 import 'loginscreen.dart';
@@ -21,10 +22,10 @@ class _SplashScreenState extends State<SplashScreen> {
   }
   @override
   Widget build(BuildContext context) {
-    return Container(
-      child: Text(
-        "Splash Screen"
-      ),
+    return EasySplashScreen(
+      logo: Image.asset('assets/memologo.png'),
+      title: Text("E Memo App"),
+      backgroundColor: Colors.blue,
     );
   }
 }
