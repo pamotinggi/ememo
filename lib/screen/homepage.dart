@@ -52,12 +52,26 @@ class _HomePageState extends State<HomePage> {
             }),
       ),
         floatingActionButton: SpeedDial(
-          icon: Icons.add,
+          icon: Icons.menu,
           backgroundColor: Colors.blueAccent,
-            onOpen: () {
-              Navigator.of(context).push(
-                  MaterialPageRoute(builder: (context) => InsertData()));
-            }
+          children: [
+            SpeedDialChild(
+                child: const Icon(Icons.add),
+                label: 'Add New Memo',
+                backgroundColor: Colors.blueAccent,
+                onTap: () {
+                  Navigator.of(context).push(
+                      MaterialPageRoute(builder: (context) => InsertData()));
+                }),
+            SpeedDialChild(
+                child: const Icon(Icons.refresh),
+                label: 'Refresh home page',
+                backgroundColor: Colors.blueAccent,
+                onTap: () {
+                  Navigator.of(context).push(
+                      MaterialPageRoute(builder: (context) => HomePage()));
+                }),
+          ],
         )
     );
   }
