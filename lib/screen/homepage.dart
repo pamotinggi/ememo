@@ -5,6 +5,7 @@ import 'package:ememo/screen/inserdata.dart';
 import 'package:ememo/widget/memo_card.dart';
 import 'package:firebase_auth/firebase_auth.dart';
 import 'package:flutter/material.dart';
+import 'package:flutter_speed_dial/flutter_speed_dial.dart';
 
 class HomePage extends StatefulWidget {
   const HomePage({Key? key}) : super(key: key);
@@ -50,6 +51,14 @@ class _HomePageState extends State<HomePage> {
               return MemoCard(_itemList[index] as viewmemo);
             }),
       ),
+        floatingActionButton: SpeedDial(
+          icon: Icons.add,
+          backgroundColor: Colors.blueAccent,
+            onOpen: () {
+              Navigator.of(context).push(
+                  MaterialPageRoute(builder: (context) => InsertData()));
+            }
+        )
     );
   }
 
