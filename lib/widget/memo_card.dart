@@ -11,8 +11,9 @@ class MemoCard extends StatelessWidget {
       constraints: BoxConstraints(
         maxHeight: double.infinity,
       ),
-      child: Container(
+      child: Card(
         color: Colors.blue,
+        elevation: 1,
         child: Column(
           children: <Widget>[
             Text(
