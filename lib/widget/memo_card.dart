@@ -12,7 +12,7 @@ class MemoCard extends StatelessWidget {
         maxHeight: double.infinity,
       ),
       child: Container(
-        color: Colors.purple,
+        color: Colors.blue,
         child: Column(
           children: <Widget>[
             Text(
