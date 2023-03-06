@@ -39,6 +39,7 @@ class _HomePageState extends State<HomePage> {
   Widget build(BuildContext context) {
     return Scaffold(
       appBar: AppBar(
+        automaticallyImplyLeading: false,
         title: Text("Home Screen"),
       ),
       body: Container(
@@ -79,8 +80,6 @@ class _HomePageState extends State<HomePage> {
   Future getMemoList() async {
     var data = await FirebaseFirestore.instance
         .collection('memo')
-        .doc(user!.email)
-        .collection('content')
         .get();
     setState(() {
       _itemList = List.from(data.docs.map((doc) => viewmemo.fromSnapshot(doc)));

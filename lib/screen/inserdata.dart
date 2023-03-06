@@ -86,9 +86,7 @@ class _InsertDataState extends State<InsertData> {
                   };
                   FirebaseFirestore.instance
                       .collection('memo')
-                      .doc(user!.email)
-                      .collection('content')
-                      .doc(date)
+                      .doc(user!.uid)
                       .set(data);
                   final snackBar =
                       SnackBar(content: const Text("Memo Submitted"));

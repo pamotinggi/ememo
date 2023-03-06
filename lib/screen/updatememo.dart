@@ -79,11 +79,11 @@ class _UpdateMempState extends State<UpdateMemp> {
               MaterialButton(
                 onPressed: () {
                   final snackBar =
-                      SnackBar(content: const Text("Memo Submitted"));
+                      SnackBar(content: const Text("Memo Updated"));
                   ScaffoldMessenger.of(context).showSnackBar(snackBar);
                   final docUser = FirebaseFirestore.instance
                       .collection('memo')
-                      .doc(user!.email);
+                      .doc(user!.uid);
                   docUser.update({
                     'from': fromNameController.text,
                     'to': toNameController.text,
