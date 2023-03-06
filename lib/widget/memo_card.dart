@@ -1,3 +1,4 @@
+import 'package:ememo/screen/updatememo.dart';
 import 'package:flutter/material.dart';
 import 'package:ememo/model/viewmemo.dart';
 
@@ -11,22 +12,36 @@ class MemoCard extends StatelessWidget {
       constraints: BoxConstraints(
         maxHeight: double.infinity,
       ),
-      child: Card(
-        color: Colors.blue,
-        elevation: 1,
-        child: Column(
-          children: <Widget>[
-            Text(
-              "From :" + '${card.from}'
+      child: Column(
+        children: [
+          Card(
+            color: Colors.blue,
+            elevation: 1,
+            child: Column(
+              children: <Widget>[
+                Text("From :" + '${card.from}'),
+                Text("To :" + '${card.to}'),
+                Text("Memo :" + '${card.memo}'),
+              ],
             ),
-            Text(
-                "To :" + '${card.to}'
-            ),
-            Text(
-                "Memo :" + '${card.memo}'
-            ),
-          ],
-        ),
+          ),
+          Row(
+            mainAxisAlignment: MainAxisAlignment.center,
+            children: [
+              MaterialButton(
+                onPressed: () {
+                  Navigator.push(context,
+                      MaterialPageRoute(builder: (context) => UpdateMemp()));
+                },
+                child: Text("Edit"),
+              ),
+              MaterialButton(
+                onPressed: () {},
+                child: Text("Delete"),
+              ),
+            ],
+          ),
+        ],
       ),
     );
   }
