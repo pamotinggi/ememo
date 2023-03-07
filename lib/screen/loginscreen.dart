@@ -1,3 +1,4 @@
+import 'package:ememo/screen/hodlogin.dart';
 import 'package:ememo/screen/homepage.dart';
 import 'package:ememo/screen/registerscreen.dart';
 import 'package:firebase_auth/firebase_auth.dart';
@@ -145,6 +146,27 @@ class _LoginScreenState extends State<LoginScreen> {
                           },
                           child: Text(
                             "Sign Up",
+                            style: TextStyle(
+                                color: Colors.red,
+                                fontWeight: FontWeight.bold),
+                          ),
+                        ),
+                      ],
+                    ),
+                    Row(
+                      mainAxisAlignment: MainAxisAlignment.center,
+                      children: <Widget>[
+                        Text("Hod Login"),
+                        GestureDetector(
+                          onTap: () {
+                            Navigator.push(
+                                context,
+                                MaterialPageRoute(
+                                    builder: (context) =>
+                                        HodLogin()));
+                          },
+                          child: Text(
+                            ".........",
                             style: TextStyle(
                                 color: Colors.red,
                                 fontWeight: FontWeight.bold),

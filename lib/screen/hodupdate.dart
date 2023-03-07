@@ -1,25 +1,31 @@
 import 'package:cloud_firestore/cloud_firestore.dart';
-import 'package:ememo/model/memo_model.dart';
 import 'package:firebase_auth/firebase_auth.dart';
 import 'package:flutter/material.dart';
 
-class InsertData extends StatefulWidget {
-  const InsertData({Key? key}) : super(key: key);
+import '../model/memo_model.dart';
+import '../model/viewmemo.dart';
+
+class HodUpdate extends StatefulWidget {
+  final viewmemo cards;
+  const HodUpdate({Key? key, required this.cards}) : super(key: key);
 
   @override
-  State<InsertData> createState() => _InsertDataState();
+  State<HodUpdate> createState() => _HodUpdateState();
 }
 
-class _InsertDataState extends State<InsertData> {
+class _HodUpdateState extends State<HodUpdate> {
+  late String id;
   final fromNameController = TextEditingController();
   final toNameController = TextEditingController();
   final memoController = TextEditingController();
-  //firebase thing
+
   FirebaseFirestore firebaseFirestore = FirebaseFirestore.instance;
   User? user = FirebaseAuth.instance.currentUser;
   memo memomodel = new memo();
+
   @override
   void initState() {
+    id = widget.cards.id!;
     super.initState();
     FirebaseFirestore.instance
         .collection("users")
@@ -31,12 +37,11 @@ class _InsertDataState extends State<InsertData> {
     });
   }
 
-  //actual flutter
   @override
   Widget build(BuildContext context) {
     return Scaffold(
       appBar: AppBar(
-        title: Text("Submit Memo"),
+        title: Text("Edit Memo"),
       ),
       body: Center(
         child: Padding(
@@ -78,31 +83,22 @@ class _InsertDataState extends State<InsertData> {
               ),
               MaterialButton(
                 onPressed: () {
-                  var date = DateTime.now().toString();
-                  Map<String, dynamic> data = {
-                    "id":date,
-                    "from": fromNameController.text,
-                    "to": toNameController.text,
-                    "memo": memoController.text,
-                    "status": "pending",
-                  };
-                  FirebaseFirestore.instance
+                  final snackBar =
+                  SnackBar(content: const Text("Memo Updated, please refresh"));
+                  ScaffoldMessenger.of(context).showSnackBar(snackBar);
+                  final docUser = FirebaseFirestore.instance
                       .collection('memo')
                       .doc(user!.email)
                       .collection('content')
-                      .doc(date)
-                      .set(data);
-                  FirebaseFirestore.instance
-                      .collection('memo')
-                      .doc('hod@memo.com')
-                      .collection('content')
-                      .doc(date)
-                      .set(data);
-                  final snackBar =
-                      SnackBar(content: const Text("Memo Submitted"));
-                  ScaffoldMessenger.of(context).showSnackBar(snackBar);
+                      .doc(id);
+                  docUser.update({
+                    'from': fromNameController.text,
+                    'to': toNameController.text,
+                    'memo': memoController.text,
+                    'status': "Approved",
+                  });
                 },
-                child: const Text('Submit Memo'),
+                child: const Text('Approve Memo'),
                 color: Colors.blue,
               ),
             ],

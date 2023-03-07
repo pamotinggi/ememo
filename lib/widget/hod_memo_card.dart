@@ -1,21 +1,20 @@
 import 'package:cloud_firestore/cloud_firestore.dart';
-import 'package:ememo/screen/updatememo.dart';
+import 'package:ememo/model/viewmemo.dart';
+import 'package:ememo/screen/hodupdate.dart';
 import 'package:firebase_auth/firebase_auth.dart';
 import 'package:flutter/material.dart';
-import 'package:ememo/model/viewmemo.dart';
 
 import '../model/memo_model.dart';
 
-class MemoCard extends StatelessWidget {
-  final viewmemo card;
-  MemoCard(this.card);
+class HodCard extends StatelessWidget {
+  final viewmemo cards;
+  HodCard(this.cards);
 
   @override
   Widget build(BuildContext context) {
     FirebaseFirestore firebaseFirestore = FirebaseFirestore.instance;
     User? user = FirebaseAuth.instance.currentUser;
     memo memomodel = new memo();
-
     return Container(
       decoration: BoxDecoration(
         color: Colors.blueAccent,
@@ -37,10 +36,10 @@ class MemoCard extends StatelessWidget {
               elevation: 1,
               child: Column(
                 children: <Widget>[
-                  Text("From :" + '${card.from}'),
-                  Text("To :" + '${card.to}'),
-                  Text("Memo :" + '${card.memo}'),
-                  Text("Hod Approval :" + '${card.status}'),
+                  Text("From :" + '${cards.from}'),
+                  Text("To :" + '${cards.to}'),
+                  Text("Memo :" + '${cards.memo}'),
+                  Text("Hod Approval :" + '${cards.status}'),
                 ],
               ),
             ),
@@ -52,7 +51,7 @@ class MemoCard extends StatelessWidget {
                 color: Colors.yellowAccent,
                 onPressed: () {
                   Navigator.push(context,
-                      MaterialPageRoute(builder: (context) => UpdateMemp(card : card)));
+                      MaterialPageRoute(builder: (context) => HodUpdate(cards : cards)));
                 },
                 child: Text("Edit"),
               ),
@@ -64,9 +63,9 @@ class MemoCard extends StatelessWidget {
                   ScaffoldMessenger.of(context).showSnackBar(snackBar);
                   final docUser = FirebaseFirestore.instance
                       .collection('memo')
-                      .doc(user!.email)
+                      .doc('hod@memo.com')
                       .collection('content')
-                      .doc(card.id);
+                      .doc(cards.id);
                   docUser.delete();
                 },
                 child: Text("Delete"),
