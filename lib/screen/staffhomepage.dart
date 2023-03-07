@@ -6,6 +6,7 @@ import 'package:flutter_speed_dial/flutter_speed_dial.dart';
 
 import '../model/user_model.dart';
 import '../model/viewmemo.dart';
+import 'loginscreen.dart';
 
 class StaffHome extends StatefulWidget {
   const StaffHome({Key? key}) : super(key: key);
@@ -64,6 +65,15 @@ class _StaffHomeState extends State<StaffHome> {
                   Navigator.of(context).push(
                       MaterialPageRoute(builder: (context) => StaffHome()));
                 }),
+            SpeedDialChild(
+                child: const Icon(Icons.logout_outlined),
+                label: 'Sign out',
+                backgroundColor: Colors.blueAccent,
+                onTap: () {
+                  _signOut;
+                  Navigator.of(context).push(
+                      MaterialPageRoute(builder: (context) => LoginScreen()));
+                }),
           ],
         ));
   }
@@ -75,4 +85,8 @@ class _StaffHomeState extends State<StaffHome> {
       _itemList = List.from(data.docs.map((doc) => viewmemo.fromSnapshot(doc)));
     });
   }
+}
+
+Future<void> _signOut() async {
+  await FirebaseAuth.instance.signOut();
 }

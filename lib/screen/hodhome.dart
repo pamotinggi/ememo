@@ -1,4 +1,5 @@
 import 'package:cloud_firestore/cloud_firestore.dart';
+import 'package:ememo/screen/loginscreen.dart';
 import 'package:ememo/widget/hod_memo_card.dart';
 import 'package:firebase_auth/firebase_auth.dart';
 import 'package:flutter/material.dart';
@@ -65,6 +66,15 @@ class _HodHomeState extends State<HodHome> {
                   Navigator.of(context).push(
                       MaterialPageRoute(builder: (context) => HodHome()));
                 }),
+            SpeedDialChild(
+                child: const Icon(Icons.logout_outlined),
+                label: 'Sign out',
+                backgroundColor: Colors.blueAccent,
+                onTap: () {
+                  _signOut;
+                  Navigator.of(context).push(
+                      MaterialPageRoute(builder: (context) => LoginScreen()));
+                }),
           ],
         ));
   }
@@ -78,4 +88,8 @@ class _HodHomeState extends State<HodHome> {
       _itemList = List.from(data.docs.map((doc) => viewmemo.fromSnapshot(doc)));
     });
   }
+}
+
+Future<void> _signOut() async {
+  await FirebaseAuth.instance.signOut();
 }
