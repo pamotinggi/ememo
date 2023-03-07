@@ -1,6 +1,8 @@
+import 'package:ememo/screen/adminlogin.dart';
 import 'package:ememo/screen/hodlogin.dart';
 import 'package:ememo/screen/homepage.dart';
 import 'package:ememo/screen/registerscreen.dart';
+import 'package:ememo/screen/staffhomepage.dart';
 import 'package:firebase_auth/firebase_auth.dart';
 import 'package:flutter/material.dart';
 import 'package:fluttertoast/fluttertoast.dart';
@@ -156,7 +158,7 @@ class _LoginScreenState extends State<LoginScreen> {
                     Row(
                       mainAxisAlignment: MainAxisAlignment.center,
                       children: <Widget>[
-                        Text("Hod Login"),
+                        Text("---->"),
                         GestureDetector(
                           onTap: () {
                             Navigator.push(
@@ -166,7 +168,28 @@ class _LoginScreenState extends State<LoginScreen> {
                                         HodLogin()));
                           },
                           child: Text(
-                            ".........",
+                            "Hod Login",
+                            style: TextStyle(
+                                color: Colors.red,
+                                fontWeight: FontWeight.bold),
+                          ),
+                        ),
+                      ],
+                    ),
+                    Row(
+                      mainAxisAlignment: MainAxisAlignment.center,
+                      children: <Widget>[
+                        Text("------>"),
+                        GestureDetector(
+                          onTap: () {
+                            Navigator.push(
+                                context,
+                                MaterialPageRoute(
+                                    builder: (context) =>
+                                        AdminLogin()));
+                          },
+                          child: Text(
+                            "Admin login",
                             style: TextStyle(
                                 color: Colors.red,
                                 fontWeight: FontWeight.bold),
@@ -190,7 +213,7 @@ class _LoginScreenState extends State<LoginScreen> {
           .then((uid) => {
         Fluttertoast.showToast(msg: "Login Successful"),
         Navigator.of(context).pushReplacement(
-            MaterialPageRoute(builder: (context) => HomePage())),
+            MaterialPageRoute(builder: (context) => StaffHome())),
       })
           .catchError((e) {
         Fluttertoast.showToast(msg: e!.message);

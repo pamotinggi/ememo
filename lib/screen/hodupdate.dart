@@ -83,8 +83,9 @@ class _HodUpdateState extends State<HodUpdate> {
               ),
               MaterialButton(
                 onPressed: () {
-                  final snackBar =
-                  SnackBar(content: const Text("Memo Updated, please refresh"));
+                  var date = DateTime.now().toString();
+                  final snackBar = SnackBar(
+                      content: const Text("Memo Updated, please refresh"));
                   ScaffoldMessenger.of(context).showSnackBar(snackBar);
                   final docUser = FirebaseFirestore.instance
                       .collection('memo')
@@ -97,6 +98,27 @@ class _HodUpdateState extends State<HodUpdate> {
                     'memo': memoController.text,
                     'status': "Approved",
                   });
+                  final docAdmin = FirebaseFirestore.instance
+                      .collection('memo')
+                      .doc('admin@memo.com')
+                      .collection('content')
+                      .doc(id);
+                  docAdmin.update({
+                    'from': fromNameController.text,
+                    'to': toNameController.text,
+                    'memo': memoController.text,
+                    'status': "Approved",
+                  });
+                  Map<String, dynamic> data = {
+                    "from": fromNameController.text,
+                    "to": toNameController.text,
+                    "memo": memoController.text,
+                    "status": "Approved",
+                  };
+                  FirebaseFirestore.instance
+                      .collection('approved memo')
+                      .doc(date)
+                      .set(data);
                 },
                 child: const Text('Approve Memo'),
                 color: Colors.blue,
