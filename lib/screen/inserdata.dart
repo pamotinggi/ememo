@@ -43,7 +43,7 @@ class _InsertDataState extends State<InsertData> {
           padding: EdgeInsets.all(9),
           child: Column(
             children: [
-              SizedBox(
+              /*SizedBox(
                 height: 50,
               ),
               TextField(
@@ -52,7 +52,7 @@ class _InsertDataState extends State<InsertData> {
                     border: OutlineInputBorder(),
                     labelText: 'From',
                     hintText: 'From :'),
-              ),
+              ),*/
               SizedBox(
                 height: 30,
               ),
@@ -80,7 +80,7 @@ class _InsertDataState extends State<InsertData> {
                 onPressed: () {
                   var date = DateTime.now().toString();
                   Map<String, dynamic> data = {
-                    "from": fromNameController.text,
+                    "status": "pending",
                     "to": toNameController.text,
                     "memo": memoController.text,
                   };

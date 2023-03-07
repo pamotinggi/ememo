@@ -43,7 +43,7 @@ class _UpdateMempState extends State<UpdateMemp> {
           padding: EdgeInsets.all(9),
           child: Column(
             children: [
-              SizedBox(
+              /*SizedBox(
                 height: 50,
               ),
               TextField(
@@ -52,7 +52,7 @@ class _UpdateMempState extends State<UpdateMemp> {
                     border: OutlineInputBorder(),
                     labelText: 'From',
                     hintText: 'From :'),
-              ),
+              ),*/
               SizedBox(
                 height: 30,
               ),
@@ -85,7 +85,7 @@ class _UpdateMempState extends State<UpdateMemp> {
                       .collection('memo')
                       .doc(user!.uid);
                   docUser.update({
-                    'from': fromNameController.text,
+                    'status': "pending",
                     'to': toNameController.text,
                     'memo': memoController.text,
                   });

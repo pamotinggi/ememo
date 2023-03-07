@@ -31,7 +31,7 @@ class MemoCard extends StatelessWidget {
               elevation: 1,
               child: Column(
                 children: <Widget>[
-                  Text("From :" + '${card.from}'),
+                  Text("Status :" + '${card.status}'),
                   Text("To :" + '${card.to}'),
                   Text("Memo :" + '${card.memo}'),
                 ],
