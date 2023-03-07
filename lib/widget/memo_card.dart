@@ -59,13 +59,13 @@ class MemoCard extends StatelessWidget {
                 color: Colors.red,
                 onPressed: () {
                   final snackBar =
-                  SnackBar(content: const Text("Memo Updated"));
+                  SnackBar(content: const Text("Memo Deleted, please refresh"));
                   ScaffoldMessenger.of(context).showSnackBar(snackBar);
                   final docUser = FirebaseFirestore.instance
                       .collection('memo')
                       .doc(user!.email)
                       .collection('content')
-                      .doc();
+                      .doc(card.id);
                   docUser.delete();
                 },
                 child: Text("Delete"),

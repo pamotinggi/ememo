@@ -1,3 +1,5 @@
+import 'dart:developer';
+
 import 'package:cloud_firestore/cloud_firestore.dart';
 import 'package:ememo/model/viewmemo.dart';
 import 'package:firebase_auth/firebase_auth.dart';
@@ -14,6 +16,7 @@ class UpdateMemp extends StatefulWidget {
 }
 
 class _UpdateMempState extends State<UpdateMemp> {
+  late String id;
   final fromNameController = TextEditingController();
   final toNameController = TextEditingController();
   final memoController = TextEditingController();
@@ -23,6 +26,7 @@ class _UpdateMempState extends State<UpdateMemp> {
   memo memomodel = new memo();
   @override
   void initState() {
+    id = widget.card.id!;
     super.initState();
     FirebaseFirestore.instance
         .collection("users")
@@ -82,15 +86,15 @@ class _UpdateMempState extends State<UpdateMemp> {
                 onPressed: () {
                   var date = DateTime.now().toString();
                   final snackBar =
-                      SnackBar(content: const Text("Memo Updated"));
+                      SnackBar(content: const Text("Memo Updated, please refresh"));
                   ScaffoldMessenger.of(context).showSnackBar(snackBar);
                   final docUser = FirebaseFirestore.instance
                       .collection('memo')
                       .doc(user!.email)
                       .collection('content')
-                      .doc('${widget.card.id}');
+                      .doc(id);
                   docUser.update({
-                    'from': fromNameController,
+                    'from': fromNameController.text,
                     'to': toNameController.text,
                     'memo': memoController.text,
                   });
