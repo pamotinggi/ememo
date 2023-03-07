@@ -1,7 +1,9 @@
 import 'package:cloud_firestore/cloud_firestore.dart';
+import 'package:ememo/model/viewmemo.dart';
 import 'package:firebase_auth/firebase_auth.dart';
 import 'package:flutter/material.dart';
 import 'package:ememo/model/memo_model.dart';
+import 'package:ememo/widget/memo_card.dart';
 
 class UpdateMemp extends StatefulWidget {
   const UpdateMemp({Key? key}) : super(key: key);
@@ -18,7 +20,6 @@ class _UpdateMempState extends State<UpdateMemp> {
   FirebaseFirestore firebaseFirestore = FirebaseFirestore.instance;
   User? user = FirebaseAuth.instance.currentUser;
   memo memomodel = new memo();
-
   @override
   void initState() {
     super.initState();
@@ -43,7 +44,7 @@ class _UpdateMempState extends State<UpdateMemp> {
           padding: EdgeInsets.all(9),
           child: Column(
             children: [
-              /*SizedBox(
+              SizedBox(
                 height: 50,
               ),
               TextField(
@@ -52,7 +53,7 @@ class _UpdateMempState extends State<UpdateMemp> {
                     border: OutlineInputBorder(),
                     labelText: 'From',
                     hintText: 'From :'),
-              ),*/
+              ),
               SizedBox(
                 height: 30,
               ),
@@ -78,14 +79,17 @@ class _UpdateMempState extends State<UpdateMemp> {
               ),
               MaterialButton(
                 onPressed: () {
+                  var date = DateTime.now().toString();
                   final snackBar =
                       SnackBar(content: const Text("Memo Updated"));
                   ScaffoldMessenger.of(context).showSnackBar(snackBar);
                   final docUser = FirebaseFirestore.instance
                       .collection('memo')
-                      .doc(user!.uid);
-                  docUser.update({
-                    'status': "pending",
+                      .doc(user!.email)
+                      .collection('content')
+                      .doc();
+                  docUser.set({
+                    'from': fromNameController,
                     'to': toNameController.text,
                     'memo': memoController.text,
                   });

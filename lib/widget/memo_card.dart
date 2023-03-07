@@ -7,7 +7,7 @@ import 'package:ememo/model/viewmemo.dart';
 import '../model/memo_model.dart';
 
 class MemoCard extends StatelessWidget {
-  late final viewmemo card;
+  final viewmemo card;
   MemoCard(this.card);
 
   @override
@@ -17,21 +17,27 @@ class MemoCard extends StatelessWidget {
     memo memomodel = new memo();
 
     return Container(
-      color: Colors.blueAccent,
+      decoration: BoxDecoration(
+        color: Colors.blueAccent,
+        borderRadius: BorderRadius.circular(10),
+      ),
       constraints: BoxConstraints(
         maxHeight: double.infinity,
       ),
       child: Column(
         children: [
           Container(
+            decoration: BoxDecoration(
+              color: Colors.blueAccent,
+              borderRadius: BorderRadius.circular(30),
+            ),
             width: 400,
-            color: Colors.blue,
             child: Card(
               color: Colors.blue,
               elevation: 1,
               child: Column(
                 children: <Widget>[
-                  Text("Status :" + '${card.status}'),
+                  Text("From :" + '${card.from}'),
                   Text("To :" + '${card.to}'),
                   Text("Memo :" + '${card.memo}'),
                 ],
@@ -57,7 +63,9 @@ class MemoCard extends StatelessWidget {
                   ScaffoldMessenger.of(context).showSnackBar(snackBar);
                   final docUser = FirebaseFirestore.instance
                       .collection('memo')
-                      .doc(user!.uid);
+                      .doc(user!.email)
+                      .collection('content')
+                      .doc();
                   docUser.delete();
                 },
                 child: Text("Delete"),

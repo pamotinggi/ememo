@@ -3,8 +3,9 @@ class memo{
   String? to;
   String? content;
   String? status;
+  String? id;
 
-  memo({this.content, this.from, this.to, this.status});
+  memo({this.content, this.from, this.to, this.status, this.id});
 
   factory memo.fromMap(map){
     return memo(
@@ -12,6 +13,7 @@ class memo{
       to: map['to'],
       content: map['content'],
       status: map['status'],
+      id: map['id'],
     );
   }
 
@@ -21,6 +23,7 @@ class memo{
       'to':to,
       'content':content,
       'status':status,
+      'id':id,
     };
   }
 }

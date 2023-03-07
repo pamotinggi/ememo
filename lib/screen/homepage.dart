@@ -38,20 +38,20 @@ class _HomePageState extends State<HomePage> {
   @override
   Widget build(BuildContext context) {
     return Scaffold(
-      appBar: AppBar(
-        automaticallyImplyLeading: false,
-        title: Text("Home Screen"),
-      ),
-      body: Container(
-        padding: EdgeInsets.all(30),
-        child: ListView.builder(
-            scrollDirection: Axis.vertical,
-            itemCount: _itemList.length,
-            itemBuilder: (context, index) {
-              final item = _itemList[index];
-              return MemoCard(_itemList[index] as viewmemo);
-            }),
-      ),
+        appBar: AppBar(
+          automaticallyImplyLeading: false,
+          title: Text("Home Screen"),
+        ),
+        body: Container(
+          padding: EdgeInsets.all(30),
+          child: ListView.builder(
+              scrollDirection: Axis.vertical,
+              itemCount: _itemList.length,
+              itemBuilder: (context, index) {
+                final item = _itemList[index];
+                return MemoCard(_itemList[index] as viewmemo);
+              }),
+        ),
         floatingActionButton: SpeedDial(
           icon: Icons.menu,
           backgroundColor: Colors.blueAccent,
@@ -73,13 +73,14 @@ class _HomePageState extends State<HomePage> {
                       MaterialPageRoute(builder: (context) => HomePage()));
                 }),
           ],
-        )
-    );
+        ));
   }
 
   Future getMemoList() async {
     var data = await FirebaseFirestore.instance
         .collection('memo')
+        .doc(user!.email)
+        .collection('content')
         .get();
     setState(() {
       _itemList = List.from(data.docs.map((doc) => viewmemo.fromSnapshot(doc)));
