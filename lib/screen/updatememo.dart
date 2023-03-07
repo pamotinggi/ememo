@@ -6,7 +6,8 @@ import 'package:ememo/model/memo_model.dart';
 import 'package:ememo/widget/memo_card.dart';
 
 class UpdateMemp extends StatefulWidget {
-  const UpdateMemp({Key? key}) : super(key: key);
+  final viewmemo card;
+  const UpdateMemp({Key? key, required this.card}) : super(key: key);
 
   @override
   State<UpdateMemp> createState() => _UpdateMempState();
@@ -87,8 +88,8 @@ class _UpdateMempState extends State<UpdateMemp> {
                       .collection('memo')
                       .doc(user!.email)
                       .collection('content')
-                      .doc();
-                  docUser.set({
+                      .doc('${widget.card.id}');
+                  docUser.update({
                     'from': fromNameController,
                     'to': toNameController.text,
                     'memo': memoController.text,

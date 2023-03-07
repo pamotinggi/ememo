@@ -51,7 +51,7 @@ class MemoCard extends StatelessWidget {
                 color: Colors.yellowAccent,
                 onPressed: () {
                   Navigator.push(context,
-                      MaterialPageRoute(builder: (context) => UpdateMemp()));
+                      MaterialPageRoute(builder: (context) => UpdateMemp(card : card)));
                 },
                 child: Text("Edit"),
               ),
