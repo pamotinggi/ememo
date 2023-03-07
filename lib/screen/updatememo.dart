@@ -1,11 +1,8 @@
-import 'dart:developer';
-
 import 'package:cloud_firestore/cloud_firestore.dart';
 import 'package:ememo/model/viewmemo.dart';
 import 'package:firebase_auth/firebase_auth.dart';
 import 'package:flutter/material.dart';
 import 'package:ememo/model/memo_model.dart';
-import 'package:ememo/widget/memo_card.dart';
 
 class UpdateMemp extends StatefulWidget {
   final viewmemo card;
@@ -84,7 +81,6 @@ class _UpdateMempState extends State<UpdateMemp> {
               ),
               MaterialButton(
                 onPressed: () {
-                  var date = DateTime.now().toString();
                   final snackBar =
                       SnackBar(content: const Text("Memo Updated, please refresh"));
                   ScaffoldMessenger.of(context).showSnackBar(snackBar);
