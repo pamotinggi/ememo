@@ -1,6 +1,5 @@
 import 'package:ememo/screen/adminlogin.dart';
 import 'package:ememo/screen/hodlogin.dart';
-import 'package:ememo/screen/homepage.dart';
 import 'package:ememo/screen/registerscreen.dart';
 import 'package:ememo/screen/staffhomepage.dart';
 import 'package:firebase_auth/firebase_auth.dart';
@@ -137,7 +136,7 @@ class _LoginScreenState extends State<LoginScreen> {
                     Row(
                       mainAxisAlignment: MainAxisAlignment.center,
                       children: <Widget>[
-                        Text("Don't have an account ? "),
+                        Text("New Staff ?"),
                         GestureDetector(
                           onTap: () {
                             Navigator.push(
